@@ -4,31 +4,19 @@ from src.jobs import read
 def get_unique_job_types(path):
 
     jobs_list = read(path)
-    job_type_list = []
 
-    for job in jobs_list:
-        if job["job_type"] not in job_type_list:
-            job_type_list.append(job["job_type"])
+    job_type_list = [
+        job["job_type"]
+        for job in jobs_list
+        if job["job_type"] not in job_type_list
+    ]
 
     return job_type_list
 
 
 def filter_by_job_type(jobs, job_type):
-    """Filters a list of jobs by job_type
 
-    Parameters
-    ----------
-    jobs : list
-        List of jobs to be filtered
-    job_type : str
-        Job type for the list filter
-
-    Returns
-    -------
-    list
-        List of jobs with provided job_type
-    """
-    return []
+    return [job for job in jobs if job_type == job["job_type"]]
 
 
 def get_unique_industries(path):
@@ -44,21 +32,8 @@ def get_unique_industries(path):
 
 
 def filter_by_industry(jobs, industry):
-    """Filters a list of jobs by industry
 
-    Parameters
-    ----------
-    jobs : list
-        List of jobs to be filtered
-    industry : str
-        Industry for the list filter
-
-    Returns
-    -------
-    list
-        List of jobs with provided industry
-    """
-    return []
+    return [job for job in jobs if industry == job["industry"]]
 
 
 def get_max_salary(path):
