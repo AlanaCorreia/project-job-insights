@@ -4,12 +4,11 @@ from src.jobs import read
 def get_unique_job_types(path):
 
     jobs_list = read(path)
+    job_type_list = []
 
-    job_type_list = [
-        job["job_type"]
-        for job in jobs_list
-        if job["job_type"] not in job_type_list
-    ]
+    for job in jobs_list:
+        if job["job_type"] not in job_type_list:
+            job_type_list.append(job["job_type"])
 
     return job_type_list
 
@@ -86,7 +85,23 @@ def matches_salary_range(job, salary):
         If `job["min_salary"]` is greather than `job["max_salary"]`
         If `salary` isn't a valid integer
     """
-    pass
+
+    if "min_salary" not in job or "max_salary" not in job:
+        raise ValueError("min salary or max salary doesn't exists")
+
+    if (
+        type(job["min_salary"]) != int
+        or type(job["max_salary"]) != int
+        or type(salary) != int
+    ):
+        raise ValueError(
+            "min salary, max salary or salary aren't valid integers"
+        )
+
+    if job["min_salary"] > job["max_salary"]:
+        raise ValueError("min salary is greather than max salary")
+
+    return job["min_salary"] <= salary <= job["max_salary"]
 
 
 def filter_by_salary_range(jobs, salary):
