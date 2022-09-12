@@ -75,7 +75,7 @@ def get_max_salary(path):
 
 
 def get_min_salary(path):
-    
+
     jobs_list = read(path)
     min_salaries = []
 
