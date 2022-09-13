@@ -8,9 +8,7 @@ mocked_tests = ["test_brazilian_jobs[read_pt_file]"]
 
 mocking = [
     mark_xfail(mocks.read_pt_file),
-    mark_dependency(
-        read_brazilian_file, mocked_tests
-    ),
+    mark_dependency(read_brazilian_file, mocked_tests),
 ]
 
 
